@@ -1,0 +1,91 @@
+/* GENERIC STYLES */
+
+a[class="nav-link"], #auth_style>a{
+    color:                      white;
+}
+a[class="nav-link"]:hover, #auth_style>a:hover{
+    color:                      lightskyblue;
+}
+
+p[class="description"]>a{
+    margin-left:                0px;
+    padding-left:               0px;
+    color:                      #6e6e6e;
+}
+
+p[class="description"]>a:hover{
+    margin-left:                0px;
+    padding-left:               0px;
+    color:                      #0279a0;
+}
+
+.bg_blocks{
+    background-color: #266bb1;
+}
+
+select:hover{
+    /* background-color:rgb(237, 245, 255); */
+    cursor: pointer;
+}
+
+
+/* CLASSES */
+
+#custom_nav_link{
+    margin-left: 0px; 
+    margin-right: 0px; 
+    padding-left: 0px; 
+    padding-right: 0px;
+}
+
+.description{
+    font-family:                Arial, Helvetica, sans-serif;
+    color:                      #6e6e6e;
+}
+
+.description>a{
+    color:                      #005092;
+}
+
+.description>a:hover{
+    color:                      #0279a0;
+}
+
+.footer{
+    background-image:           linear-gradient(#266bb1, #143d66);
+    width: 100%;
+}
+
+.footer_links{
+    text-decoration:            none;
+    color:                      rgb(228, 228, 228);
+}
+
+.footer_links:hover{
+    text-decoration:            none;
+    color:                      rgb(201, 225, 255);
+}
+
+.header{
+    background-image:           linear-gradient(#143d66, #266bb1);
+    width: 100%;
+}
+
+.welcome{
+    color: lightgreen;
+    font-size: 0.8em;
+    vertical-align: bottom;
+}
+/* IDs */
+
+#logo{
+    width:                      30px;
+    height:                     30px;
+    display:                    inline-block;
+}
+
+#logo_tec{
+    width:                      45%;
+    height:                     70px;
+    display:                    inline-block;
+}

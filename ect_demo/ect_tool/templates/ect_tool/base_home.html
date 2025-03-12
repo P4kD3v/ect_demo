@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+{% block home %}
+<div class="col-2"></div>
+<div class="col-8 col-s-9">
+  <div class="row mt-5">
+    <div class="col-12 text-center">
+
+      <h4 class="fs-5 pb-2 text-dark">Purpose</h4>
+      <p class="display-6 fs-6 mb-4 fst-italic description">
+        The purpose of this tool is to complement the research in Uterine Corpus Endometrial Carcinoma (UCEC)
+        giving tools to make a statistical analysis of their data, to have an overview of the effects that this
+        type of cancer produces in people depending some different aspects as can be the patient age, if the patient 
+        recieved radiation therapy or not, the expresion of one gene, and more.
+      </p> 
+
+      <h4 class="fs-5 pb-2 text-dark">Data Sets</h4>
+      <p class="display-6 fs-6 mb-4 fst-italic description">  
+        In order to do a survival analysis of this type of cancer, we where useing the Uterine Corpus Endometrial
+        Carcinoma (TCGA, PanCancer Atlas) dataset from <a class="m-0 p-0 mb-4" href="https://www.cbioportal.org/datasets"><u>cBioportal</u></a>
+        (Reference: <a class="m-0 p-0 mb-4" href="https://pubmed.ncbi.nlm.nih.gov/?term=29625048%2C29596782%2C29622463%2C29617662%2C29625055%2C29625050%2C29617662%2C30643250%2C32214244%2C29625049%2C29850653%5Buid%5D"><u>TCGA, Cell 2018</u></a>) 
+        with 529 patient samples.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-2 mt-0 p-4 pt-0 pe-2 col-s-12">
+  <div class="mb-4 p-4 pt-3 pe-0  text-center aside">
+    <form class="ps-4" action="{% url 'ect:index' %}" target="_blank" method="post">
+      {% csrf_token %}
+      <label class="w-75 fs-5 text-dark border-bottom mb-2 mt-4" for="pubmed_input">Pubmed</label>
+      <input class="w-75 text-center" id="pubmed_input" name="pubmed_input" type="text"    placeholder="Write here"><br>
+      <input class="btn w-75 btn-success btn-sm mb-3" id="pubmed_submit" name="pubmed_submit" type="submit"  value="Search">
+    </form>
+
+    <form class="ps-4" action="{% url 'ect:index' %}" target="_blank" method="post">
+      {% csrf_token %}
+      <label class="w-75 fs-5 text-dark border-bottom mb-2 mt-4" for="ncbi_input">NCBI</label>
+      <input class="w-75 text-center" id="ncbi_input" name="ncbi_input" type="text"    placeholder="Write here"><br>
+      <input class="btn w-75 btn-success btn-sm mb-3" id="ncbi_submit" name="ncbi_submit" type="submit"  value="Search">
+    </form>
+
+    <form class="ps-4" action="{% url 'ect:index' %}" target="_blank" method="post">
+      {% csrf_token %}
+      <label class="w-75 fs-5 text-dark border-bottom mb-2 mt-4" for="hgnc_input">HGNC</label>
+      <input class="w-75 text-center" id="hgnc_input" name="hgnc_input" type="text"    placeholder="Write here"><br>
+      <input class="btn w-75 btn-success btn-sm mb-3" id="hgnc_submit" name="hgnc_submit" type="submit"  value="Search">
+    </form>
+  </div>
+</div>
+{% endblock home %}

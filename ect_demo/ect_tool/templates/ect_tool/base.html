@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!--------------------------
+        META DATA 
+    --------------------------->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-------------------------- 
+        CSS & BOOTSTRAP 
+    --------------------------->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/admin.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/index.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/main.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/home.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/overview.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/genes.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/custom_panel.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/other_apps.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/css/jquery_ui.css' %}">
+
+    <!-------------------------- 
+        JAVASCRIPT AND JQUERY 
+    --------------------------->
+    {% load static %}
+    <script src="{% static 'ect_tool/vendor/jquery/jquery-3.6.1.min.js' %}"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.css' %}">
+    {% load static %}
+    <script src="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
+    
+    <!-------------------------- 
+        MY JQUERY 
+    --------------------------->
+    <!-- {% load static %}
+    <script src="{% static 'ect_tool/js/plot_info.js' %}"></script> -->
+    {% load static %}
+    <script src="{% static 'ect_tool/js/gene_search.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/infiltration_form.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/overview_form.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/gene_form.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/gene_plots_form.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/tools.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/progress.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/bmi_tool.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/scroll_legend.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/gene_ranking.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/custom_plot_designer.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/custom_plot_designer_button.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/custom_plot_designer_add_rm .js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/registration.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'ect_tool/js/admin.js' %}"></script>
+
+    <script>
+      $( function() {
+        $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+        $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+      } );
+    </script>
+
+    <!--------------------------
+        TITLE 
+    --------------------------->
+    <title>ECT v4 {{title}}</title>
+
+  </head>
+
+  <body>
+
+    <!--------------------------  
+        HEADER 
+    --------------------------->
+
+    <div class="row m-0 pb-0 pt-3 text-center text-white header align-middle bg_blocks">
+      {% include "./block_top_menu.html" %}
+    </div>
+    
+    <!-------------------------- 
+        HOME PAGE CONTENT 
+    --------------------------->
+
+    {% if type == 'home' %}
+    <div class="row pb-4" id="home">      
+      {% block home %}
+      {% endblock home%}   
+    </div>
+    {% endif %}
+
+    <!-------------------------- 
+        HELP PAGE CONTENT 
+    --------------------------->
+
+    {% if type == 'help_guide' %}
+    <div class="row pb-4" id="help_guide">      
+      {% block help_guide %}
+      {% endblock help_guide%}   
+    </div>
+    {% endif %}
+
+
+    <!-------------------------- 
+        OVERVIEW PAGE CONTENT 
+    --------------------------->
+
+    {% if title == 'Overview' or title == 'Overview Survival' %}
+    <div class="row pe-1 ps-1 mb-4" id="overview">  
+      <!-- MAIN CONTAINER AS BODY WHERE DE DATA WILL APPEAR -->
+      <div class="col-12 col-s-9">     
+        {% block overview %}
+          <div class="col-12 col-s-9" id="overview_survival">
+            {% block overview_survival %}
+            {% endblock overview_survival %}
+          </div>
+          <div class="col-12 col-s-9" id="overview_infiltration">
+            {% block overview_infiltration %}
+            {% endblock overview_infiltration %}
+          </div>
+          <div class="col-12 col-s-9" id="overview_clinical_infiltration">
+            {% block overview_clinical_infiltration %}
+            {% endblock overview_clinical_infiltration %}
+          </div>
+          <div class="col-12 col-s-9" id="overview_bmi">
+            {% block overview_bmi %}
+            {% endblock overview_bmi %}
+          </div>
+        {% endblock overview %} 
+      </div>  
+    </div>
+    {% endif %}    
+
+
+    <!--------------------------  
+        FOOTER 
+    --------------------------->
+    <div class="row m-0 pt-4 pb-4 footer">
+      {% include "./block_footer.html" %}
+    </div>  
+
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "./base_overview_survival.html" %}
+{% block overview_survival_category %}  
+
+<h2 class="mt-4 mb-0 pb-0 pt-5 text-center text-white rounded-top" id="overview_field_title">EC {{category_title}} Plots</h2>
+<h6 class="mt-0 pt-0 pb-5 mb-0 text-center rounded-bottom" id="overview_field_subtitle"><b>Kaplan-Meier<br>{{survival_mode_title}}</b></h6>
+<!-- FORM TO FILTER THE SURVIVAL TYPE ANALYSIS -->
+<div class="col-2 ps-0 col-s-9">
+  <div class="row">
+    <div class="col-12 pt-4">
+      {% include "./block_survival_filters.html"%}      
+    </div>
+  </div>
+</div>
+<!-- 1st PLOT CONTAINER -->
+<div class="col-10 col-s-9 mt-0 pe-0">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-7 p-0 m-0 mt-4 col-s-9">
+      {{survival_plot|safe}}
+      {{table_plot|safe}}            
+    </div>
+    <div class="col-4 col-s-9 pe-4">
+      <div class="row mt-4 p-0">
+        <div class="col-12 m-0 p-0 text-center">
+          {{bar_plot|safe}}
+        </div>
+      </div>           
+    </div>
+  </div>
+</div>
+
+{% endblock overview_survival_category %}  
