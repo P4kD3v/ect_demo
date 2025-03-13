@@ -31,25 +31,15 @@ urlpatterns     = [
                 views.index,                        
                 name='index'),
 
-        # /ect_tool/help_guide/
-        path(   'ect_tool/help_guide/',                    
-                views.help_guide,                     
-                name='help_guide'),
+        # /ect_tool/ect/
+        path(   'ect_tool/ect/',                    
+                views.ect,                     
+                name='ect'),
 
-        # /ect_tool/overview/
-        path(   'ect_tool/overview/',                    
-                views.overview,                     
-                name='overview'),
-
-        # /ect_tool/overview_survival/
-        path(   'ect_tool/overview_survival/',                         
-                views.overview_survival,                  
-                name='overview_survival'),
-
-        # /ect_tool/clinical_subcategory/
-        path(   'ect_tool/clinical_subcategory/',                         
-                views.clinical_subcategory,                  
-                name='clinical_subcategory'),
+        # /ect_tool/cite_us/
+        path(   'ect_tool/cite_us/',                    
+                views.cite_us,                     
+                name='cite_us'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

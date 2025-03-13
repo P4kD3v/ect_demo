@@ -1,0 +1,86 @@
+{% extends "./base.html" %}
+{% block ect %}
+
+<div class="row m-0 p-0">
+    <h2 class="w-100 m-0 p-3 pb-2 ps-4 pe-4 fs-3 text-center rounded-top text-white topmenu">EC Tool<br><p class="mt-2 ms-4 me-4 ps-4 pe-4 fs-6"><small>Do a survival analysis of the Endometrial Cancer disease by different clinical patient data as grade, stage, hitologic type, molecular subtype and age.</small></p></h2>
+    <div class="col-2 m-0 p-0 rounded border-top">
+        <p class="w-100 m-0 p-2 fs-6 text-center rounded-top result_headers text-white border-bottom" for="analysis_type">
+            <small>Fields</small>
+        </p>
+        <form id="overview_form" class="m-0 p-0 w-100 text-center" action="{% url 'ect:ect' %}" method="post"> 
+            {% csrf_token %}
+            <p class="m-0 p-0 p-2 text-center fs-4 rounded-top topmenu text-white border-bottom"><small>Overview</small></p>
+            <div class="w-100 m-0 p-0">
+                <label class="w-100 p-2 fs-6 text-center select_labels text-white rounded-top" for="analysis_type">
+                    <small>Select analysis</small>
+                </label>
+                <select class="w-100 form-select form-select-sm text-center rounded-0 rounded-bottom" name="survival_type" id="analysis_type">
+                    <option value="os" selected><small>Overall Survival</small></option>
+                    <option value="pfs"><small>Progresion-Free Survival</small></option>
+                </select>
+                            
+            </div>
+            <div class="w-100 m-0 p-0 pt-1">
+                <label class="w-100 p-2 fs-6 text-center select_labels text-white rounded-top" for="analysis_type">
+                    <small>Select category</small>
+                </label>
+                <select class="w-100 form-select form-select-sm text-center rounded-0 rounded-bottom" name="clinical_category">
+                    <option value="grade" selected><small>By Grade</small></option>
+                    <option value="tumor_type"><small>By Histological Type</small></option>
+                    <option value="mol_subtype"><small>By Molecular Subtype</small></option>
+                    <option value="stage"><small>By Stage</small></option>
+                    <option value="radiotherapy"><small>By Radiation Therapy</small></option>
+                    <option value="age_group"><small>By Age</small></option>
+                    <option value="bmi_status"><small>By BMI</small></option>
+                </select>
+            </div>
+            <button class="btn btn-success w-100 btn-sm mt-1 mb-0 p-1 fs-6" id="scroll_overview" name="show" type="submit"><small>Plot</small></button>
+        </form>
+
+    </div>
+    <div class="col-10 m-0 p-0 border-start">
+        <p class="w-100 m-0 p-2 fs-6 text-center border-top rounded-top result_headers text-white" for="analysis_type">
+            <small>Result</small>
+        </p>
+        <div class="row m-0 p-0">
+            <div class="col-7">
+                {{survival_plot|safe}}
+                {% if table_plot %}
+                    <div class="row m-0 p-0 ps-2 pb-4 pe-0 me-0 border-bottom"> 
+                            <p class="ms-3 mb-0 pb-0 fs-5 fw-bold text-dark text-opacity-75"><small>Population at risk by time</small></p>
+                            <table style="width: 85%;" class="table table-light pe-0 ms-4 me-0">
+                                {% for row in table_plot %}
+                                    {% if row.0 == 'Months' %}
+                                        <tr style="color: cadetblue;">
+                                            {% for item_data in row %}
+                                                {% if item_data == 'Months' %}
+                                                    <th class="text-start align-middle" style="width: 16%;"><small>{{item_data}}</small></th>
+                                                {% else %}
+                                                    <th class="text-center align-middle"><small>{{item_data}}</small></th>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            {% for item_data in row %}
+                                                {% if item_data.0 %}
+                                                    <td class="text-start fw-bold align-middle" style="font-size: 0.9em;"><small>{{item_data}}</small></td>
+                                                {% else %}
+                                                    <td class="text-center align-middle" style="font-size: 0.9em;"><small>{{item_data}}</small></td>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>                        
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-5">
+                {{bar_plot|safe}}
+            </div>
+        </div>
+   
+    </div>
+</div>
+{% endblock ect %}

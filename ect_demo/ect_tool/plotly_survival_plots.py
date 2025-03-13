@@ -1,4 +1,4 @@
-#   App Name:   Endometrial Cancer Tool v5.
+#   App Name:   Endometrial Cancer Tool (Demo).
 #   Author:     Xavier Llobet Navàs.
 #   Content:    Survival plots file.
 #
@@ -15,16 +15,7 @@
 #   - at_risk_table_generator(): filter patient ids from survival 
 #     dataframe.
 #   - create_counting_bar_plot(): population bar plot.
-#   - plotly_scikit_survival(): TEST function.
 #   - kme_dict_generator(): TEST function.
-#   - plotly_survival_function(): survival function for the entire
-#     dataset.
-#   - plotly_cumulative_density(): cumulative density function for the 
-#     entire dataset.
-#   - plotly_median_expresion_survival(): gene expression survival for 
-#     median cutoff.
-#   - plotly_percentil_expresion_survival(): gene expression survival for 
-#     percentil cutoff.
 #
 # - Other modules used are:
 #
@@ -39,16 +30,14 @@ from    lifelines                   import  KaplanMeierFitter
 from    sksurv.nonparametric        import  kaplan_meier_estimator
 from    plotly.graph_objs           import  Figure
 from    plotly.offline              import  plot
-import  plotly.figure_factory       as      ff
 import  plotly.express              as      px
-import  plotly.graph_objs           as      go
 import  pandas                      as      pd
 from    pandas                      import  concat
 from    .                           import  ut_constants as cns
 from    .                           import  ut_stats     as stats
 
 # =====================================================================
-# MAIN AND REUSABLE KAPLAN-MEIER FUNCTIONS
+# REUSABLE FUNCTIONS FOR KAPLAN-MEIER ANALYSIS
 # =====================================================================
 
 # Generator of KaplanMeierFitter object
@@ -309,7 +298,7 @@ def ceate_at_risk_values_list(entry_group:          str,
 # ---------------------------------------------------------------------
 def at_risk_table_generator(survival_groups: list, 
                             entry_kmf_dict:  dict[str:KaplanMeierFitter],
-                            entry_title:     str)->Figure:
+                            entry_title:     str)->list:
     '''
     Create a table with the patients at risk by time for each entry in 
     the 'entry_kmf_dict'.
@@ -339,27 +328,7 @@ def at_risk_table_generator(survival_groups: list,
     # Insert headers in the beginning of the event values list:
     at_risk_values_list.insert(0,table_headers)
 
-    # Set colors list:
-    text_colors_list:       list    = ['white', 'blue', 'red', 'green', 'purple', 'darkorange']
-    current_colors_list:    list    = text_colors_list[:len(list(entry_kmf_dict.keys()))+1]
-
-    # Create table as plot
-    survival_table:         Figure  = ff.create_table(at_risk_values_list, 
-                                                      height_constant=20,
-                                                      font_colors=current_colors_list)
-
-    # Create title:
-    table_title:            str     = f"<b>Population at risk by time of</b> {entry_title}"
-
-    #Update table layout margins
-    survival_table.update_layout(font               = dict(size = 10),
-                                 margin             = {'t':50, 'b':0, 'r':50},
-                                 title_text         = table_title,
-                                 title_font_family  = "sans-serif",
-                                 title_x            = 0.5,
-                                 title              = dict(font=dict(size=18)))
-
-    return survival_table
+    return at_risk_values_list
 
 
 # Kaplan-Meier Survival curve manager
@@ -408,150 +377,57 @@ def plotly_survival(entry_df:           pd.DataFrame,
         into an html 'div' tag.
     '''
 
-    # Facet checkers
-    is_facet_col:               bool                = (facet_col_name !=  None)
-    is_facet_row:               bool                = (facet_row_name !=  None)
-    
     # Creating the names where the moths are status data are dependig on the 'mode':
-    months_column_name:         str                 = f"{mode}_months"
-    status_column_name:         str                 = f"{mode}_status"  
-   
-    # If only Facet Column
-    if is_facet_col and (not is_facet_row):
-        plot_groups_list:       list[pd.DataFrame]  = []
-        logrank_p_value:        dict                = {}        
-        setted_plot_values:     list                = list(set(entry_df[groups_column_name]))
-        setted_fcol_values:     list                = list(set(entry_df[facet_col_name]))
-        # If Gene selected
-        if ('gene' in facet_col_name) or ('gene' in groups_column_name):
-            print("Is Gene")
-            if 'gene' in facet_col_name:
-                plot_groups:    list                = [subcat for subcat in cns.SURVIVAL_GROUPS[groups_column_name] if subcat in setted_plot_values]
-                cat_orders:         dict            = {'gene':facet_col_groups}
-            elif 'gene' in groups_column_name:
-                plot_groups:    list                = [subcat for subcat in setted_plot_values]
-                cat_orders:         dict            = {facet_col_name:facet_col_groups}
-
-
-            
-
-            print("plot_groups", plot_groups)
-            print("facet_col_groups", facet_col_groups)
-            print("cat_orders", cat_orders)
-            
-        # If Gene not selected
-        else:
-            print("Is not Gene")
-            plot_groups:        list                = [subcat for subcat in cns.SURVIVAL_GROUPS[groups_column_name] if subcat in setted_plot_values]
-            facet_col_groups:   list                = [subcat for subcat in cns.SURVIVAL_GROUPS[facet_col_name] if subcat in setted_fcol_values] 
-            cat_orders:         dict                = {facet_col_name:facet_col_groups}
-
-            print("plot_groups", plot_groups)
-            print("facet_col_groups", facet_col_groups)
-            print("cat_orders", cat_orders)
-
-        for facet in facet_col_groups:
-            print("\nIN facet:", facet)
-            print("---------------------------")
-
-            current_facet_df:   pd.DataFrame        = entry_df[entry_df[facet_col_name] == facet]
-            # Calculate StatisticalResult object with properties 'p_value', 'summary', 'test_statistic', 'print_summary':
-            current_p_value:    str                 = stats.calculate_formatted_multi_logrank_p(current_facet_df[months_column_name],                                                            
-                                                                                                current_facet_df[groups_column_name],
-                                                                                                current_facet_df[status_column_name])
-            logrank_p_value[facet]                  = current_p_value
-
-            for group in plot_groups:
-                print("\nIN group:", group)
-                print("---------------------------")
-                current_group_df:   pd.DataFrame    = current_facet_df[current_facet_df[groups_column_name] == group]
-
-                if len(current_group_df)>2:
-                    print("DF bigger than 2")
-                    status_values:  list[bool]          = [True if int(value)==1 else False for value in current_group_df[status_column_name]]
-                    kmf:            KaplanMeierFitter   = kaplan_meier_fitter_generator(current_group_df,group,mode)
-                    kme_df:         pd.DataFrame        = pd.DataFrame( data = {'timeline':             kmf.survival_function_.index,
-                                                                                'Survival probability': kmf.survival_function_[group],
-                                                                                'Legend':               group,
-                                                                                facet_col_name:         facet})                    
-                    plot_groups_list.append(kme_df)
-                else:
-                    pass
-            
-
-    # If only Facet Row
-    elif is_facet_row and (not is_facet_col):
-        pass
+    months_column_name:     str                 = f"{mode}_months"
+    status_column_name:     str                 = f"{mode}_status"  
     
-    # If no Facets
-    else:
-        # print("entry_df", entry_df)
-        # print("mode", mode)
-        # print("plot_title", plot_title)
-        # print("groups_column_name", groups_column_name)
-        print("survival_groups", survival_groups)
 
-        # Calculate StatisticalResult object with properties 'p_value', 'summary', 'test_statistic', 'print_summary':
-        logrank_p_value:        str                 = stats.calculate_formatted_multi_logrank_p(entry_df[months_column_name],                                                            
-                                                                                                entry_df[groups_column_name],
-                                                                                                entry_df[status_column_name])
-        # Create a dictionary with the 'survival_groups' as keys and its relate DataFrame:
-        groups_df_dict:         dict                = { group:entry_df.loc[entry_df[groups_column_name] == group] 
-                                                        for group in survival_groups if group in list(entry_df[groups_column_name])}
+    # Calculate StatisticalResult object with properties 'p_value', 'summary', 'test_statistic', 'print_summary':
+    logrank_p_value:        str                 = stats.calculate_formatted_multi_logrank_p(entry_df[months_column_name],                                                            
+                                                                                            entry_df[groups_column_name],
+                                                                                            entry_df[status_column_name])
+    # Create a dictionary with the 'survival_groups' as keys and its relate DataFrame:
+    groups_df_dict:         dict                = { group:entry_df.loc[entry_df[groups_column_name] == group] 
+                                                    for group in survival_groups if group in list(entry_df[groups_column_name])}
 
-        # KM FITTER =====================================================================================================================================
+    # KM FITTER =====================================================================================================================================
 
-        # Create a dictionary with the 'survival_groups' as keys and its relate and fitted KaplanMeierFitter object:
-        groups_kmf_dict:        dict[str:KaplanMeierFitter]  = {group:kaplan_meier_fitter_generator(groups_df_dict[group],group,mode) 
-                                                                for group in survival_groups if len(groups_df_dict[group])>2}
+    # Create a dictionary with the 'survival_groups' as keys and its relate and fitted KaplanMeierFitter object:
+    groups_kmf_dict:        dict[str:KaplanMeierFitter]  = {group:kaplan_meier_fitter_generator(groups_df_dict[group],group,mode) 
+                                                            for group in survival_groups if len(groups_df_dict[group])>2}
 
-        # Create a list of Dataframes with the survival data in each dataframe:
-        plot_groups_list:       list[pd.DataFrame]  = [ pd.DataFrame(data = {   'timeline':             groups_kmf_dict[group].survival_function_.index,
-                                                                                'Survival probability': groups_kmf_dict[group].survival_function_[group],
-                                                                                'Legend':               group})
-                                                        for group in survival_groups if len(groups_df_dict[group])>2]
+    # Create a list of Dataframes with the survival data in each dataframe:
+    plot_groups_list:       list[pd.DataFrame]  = [ pd.DataFrame(data = {   'timeline':             groups_kmf_dict[group].survival_function_.index,
+                                                                            'Survival probability': groups_kmf_dict[group].survival_function_[group],
+                                                                            'Legend':               group})
+                                                    for group in survival_groups if len(groups_df_dict[group])>2]
         
-        # if groups_column_name == 'tumor_type':
-        #     print("SEROUS:", set(list(groups_df_dict['Serous']['tumor_type'])), len(groups_df_dict['Serous']['tumor_type']))
-        cat_orders:             dict                = {'Legend':list(groups_kmf_dict.keys())}
+    # if groups_column_name == 'tumor_type':
+    #     print("SEROUS:", set(list(groups_df_dict['Serous']['tumor_type'])), len(groups_df_dict['Serous']['tumor_type']))
+    cat_orders:             dict                = {'Legend':list(groups_kmf_dict.keys())}
         
         
     # Concat survival DataFrames. 'objs' value has to a list of DataFrames.
-    plot_groups_df:             pd.DataFrame        = concat(objs=plot_groups_list, ignore_index=True)
+    plot_groups_df:         pd.DataFrame        = concat(objs=plot_groups_list, ignore_index=True)
     # print("Creating Survival Figure.................")
 
-    # Create the plot figure:
-    survival_fig:               Figure              = survival_figure_generator(plot_groups_df, 
-                                                                                plot_title, 
-                                                                                logrank_p_value,                                                                                 
-                                                                                facet_col_name   = facet_col_name,
-                                                                                entry_orders     = cat_orders,
-                                                                                facet_col_groups = facet_col_groups,
-                                                                                facet_row_name   = facet_row_name,
-                                                                                facet_row_groups = facet_row_groups)
-    if (not is_facet_col) and (not is_facet_row):
-        # print("Creating Survival Table Figure...........")
-        at_risk_table:          Figure              = at_risk_table_generator(survival_groups, groups_kmf_dict, plot_title)
-        at_risk_table_div:      str                 = plot(at_risk_table, output_type="div", config=cns.TOOLBAR_CONFIG)
-
-    if is_facet_col:
-        if len(cat_orders[facet_col_name]) >3:
-            survuval_div:               str                 = plot(survival_fig, output_type="div", config=cns.TOOLBAR_CONFIG_XL)
-        else:
-             survuval_div:               str                 = plot(survival_fig, output_type="div", config=cns.TOOLBAR_CONFIG_L)
-    else:
-        survuval_div:               str                 = plot(survival_fig, output_type="div", config=cns.TOOLBAR_CONFIG)
+    # Create the plot figures:
+    survival_fig:           Figure              = survival_figure_generator(plot_groups_df, 
+                                                                            plot_title, 
+                                                                            logrank_p_value,                                                                                 
+                                                                            facet_col_name   = facet_col_name,
+                                                                            entry_orders     = cat_orders,
+                                                                            facet_col_groups = facet_col_groups,
+                                                                            facet_row_name   = facet_row_name,
+                                                                            facet_row_groups = facet_row_groups)
+    at_risk_table:          list              = at_risk_table_generator(survival_groups, groups_kmf_dict, plot_title)
     
-    # print("Returning Plotly figures.................")
-    if (not is_facet_col) and (not is_facet_row):
-        return (survuval_div, at_risk_table_div)
-    else:
-        return (survuval_div, "")
+    # Output created plots as a HTML 'div' tag:
+    # at_risk_table_div:      str                 = plot(at_risk_table, output_type="div", config=cns.TOOLBAR_CONFIG)
+    survuval_div:           str                 = plot(survival_fig, output_type="div", config=cns.TOOLBAR_CONFIG)
+    
+    return (survuval_div, at_risk_table)
 
-
-# =====================================================================
-# POPULATION FUNCTION
-# =====================================================================
     
 # Pupulation bar plot
 # ---------------------------------------------------------------------
@@ -606,10 +482,10 @@ def create_counting_bar_plot(entry_df:      pd.DataFrame,
                             legend_title_text   = 'Legend',
                             title               = dict(font=dict(size=my_size)),
                             title_font_family   = "sans-serif",
-                            title_x             = 0.5,
+                            title_x             = 0.05,
                             xaxis_title         = entry_x_title,
                             bargap              = 0,
-                            font                = dict(size = 9),
+                            font                = dict(size = 15),
                             yaxis               = dict(showgrid = True),
                             xaxis               = dict(showgrid = False))
 
@@ -641,193 +517,4 @@ def kme_dict_generator( entry_df:     pd.DataFrame,
                       'conf_up':    list(kme_conf_int[1])}
 
     return kme_dict
-
-
-# =====================================================================
-# SURVIVAL FUNCTIONS FOR THE ENTIRE DATASET
-# =====================================================================
-
-# Kaplan-Meier survival plot for the entire dataset entries
-# ---------------------------------------------------------------------
-def plotly_survival_function(entry_kmf:     KaplanMeierFitter, 
-                             x_values:      pd.Series, 
-                             mode:          str, 
-                             plot_title:    str)->tuple[str,str]:
-    '''
-    This function generate a survival curve for all the entries in the 
-    dataset using the Kaplan-Meier method and a risk by time table plot, 
-    and return it embedded into an html 'div' tag.
-
-    - Kaplan-Meier estimate: is a way of computing the survival over time 
-    in spite of all these difficulties associated with subjects or 
-    situations. For each time interval, survival probability is calculated 
-    as the number of subjects surviving divided by the number of patients 
-    at risk.
-
-    ## Parameters:
-        - entry_kmf (KaplanMeierFitter): fitted KaplanMeierFitter object.
-        - x_values (pd.Series): values of the survival function from 
-        the 'entry_kmf' object.
-        - mode (str): mode (str): can be Overall (os) or Progression-Free Survival
-        (pfs).
-        - plot_title (str): title for the plot.
-
-    ## Returns a tuple of:
-        - survuval_div (str): survival curve plot embedded into an html 
-        'div' tag.
-        - table_plot_div (str): : at risk by time table plot embedded 
-        into an html 'div' tag.
-    '''
-
-    # Create an empty Figure.
-    fig:            Figure              = go.Figure()
-
-    # Add survival trace.
-    fig.add_trace(go.Scatter(   x       = x_values,
-                                y       = entry_kmf.survival_function_['KM Survival Curve'],
-                                name    = 'Survival',
-                                line    = dict(color='royalblue', width=1, shape='vh')))
-    
-    # Update survival trace
-    fig.update_traces(mode="markers+lines", marker=dict(size=7, symbol="line-ns-open"))                                    
-    
-    # Add confidence intervals traces
-    fig.add_trace(go.Scatter(   x       = x_values,
-                                y       = entry_kmf.confidence_interval_['KM Survival Curve_upper_0.95'],
-                                name    = 'Conf.Up 0.95',
-                                line    = dict(color='coral', width=1, dash='dot', shape='vh')))
-
-    fig.add_trace(go.Scatter(   x       = x_values,
-                                y       = entry_kmf.confidence_interval_['KM Survival Curve_lower_0.95'],
-                                name    = 'Conf.Down 0.95',
-                                line    = dict(color='coral', width=1, dash='dash', shape='vh')))
-
-    # Update plot layout
-    fig.update_layout(  
-                        xaxis_title     = "Months",
-                        yaxis_title     = f"{mode} probability value",
-                        hovermode       = "x unified",
-                        legend          = dict( orientation = 'v',
-                                                        # yanchor     = 'bottom',
-                                                        # y           = 1.02,
-                                                        # xanchor     = 'right',
-                                                        # x           = 1,
-                                                        font=dict(size= 11)),
-                        title_x         =0.5,
-                        title_font_family="sans-serif",
-                        title           =dict(text=plot_title, font=dict(size=25)),
-                        xaxis           = dict( zeroline    = False,
-                                                domain      = [0,0.94],
-                                                showgrid    = True),
-                        yaxis           = dict( zeroline    = False,
-                                                showgrid    = True),
-                        bargap          = 0.1)
-    
-    # Create headers for at risk by time table.
-    table_data:         list            = [['Months', '0', '10', '20', '30', '40', '50', '60']]
-
-    # At risk by time table dataframe
-    all_table_df:   pd.DataFrame    = entry_kmf.event_table
-
-    # At risk by time table values.
-    all_values:     list            = [ "At risk", 
-                                        all_table_df['at_risk'].max(), 
-                                        all_table_df.loc[all_table_df.index < 10]['at_risk'].min(), 
-                                        all_table_df.loc[(all_table_df.index < 20)]['at_risk'].min(), 
-                                        all_table_df.loc[(all_table_df.index < 30)]['at_risk'].min(), 
-                                        all_table_df.loc[(all_table_df.index < 40)]['at_risk'].min(), 
-                                        all_table_df.loc[(all_table_df.index < 50)]['at_risk'].min(), 
-                                        all_table_df['at_risk'].min()]
-    table_data.append(all_values)        
-
-    # Create at risk by time table.
-    fig_table:      Figure          = ff.create_table(table_data, height_constant=20)
-
-    # Update table layout
-    fig_table.update_layout(margin  = {'l':0, 'r':20})
-
-    # Embedd plots into 'div' html tag.
-    plot_div:       str             = plot(fig, output_type="div", config=cns.TOOLBAR_CONFIG)
-    table_plot_div: str             = plot(fig_table, output_type="div")
-    
-    return (plot_div, table_plot_div)
-
-
-# Kaplan-Meier Confidence Intervals Cumulative Density plot for the 
-# entire dataset entries.
-# ---------------------------------------------------------------------
-def plotly_cumulative_density(entry_kmf:    KaplanMeierFitter, 
-                              x_values:     pd.Series, 
-                              mode:         str, 
-                              plot_title:   str)->str:
-    '''
-    Calculate an estimated cumulative density (or proportion)
-    of failures at each time point.
-
-    -The confidence level sets the boundaries of a confidence interval, 
-    this is conventionally set at 95% to coincide with the 5% convention 
-    of statistical significance in hypothesis testing. In some studies 
-    wider (e.g. 90%) or narrower (e.g. 99%) confidence intervals will be 
-    required. This rather depends upon the nature of your study. You should 
-    consult a statistician before using CI's other than 95%.
-
-    -A 95% Cconfidence Interval is the interval that you are 95% certain 
-    contains the true population value as it might be estimated from a 
-    much larger study.
-    
-    ## Parameters:
-        - entry_kmf (KaplanMeierFitter): fitted KaplanMeierFitter object.
-        - x_values (pd.Series): values of the survival function from 
-        the 'entry_kmf' object.
-        - mode (str): mode (str): can be Overall (os) or Progression-Free Survival
-        (pfs).
-        - plot_title (str): title for the plot.
-
-    ## Return:
-        - plot_div (str): Confidence Interval Cumulative Density plot embedded
-        into a 'div' html tag.
-    '''
-
-    fig:            Figure                  = go.Figure()
-
-    fig.add_trace(go.Scatter(   x           = x_values,
-                                y           = entry_kmf.cumulative_density_['KM Survival Curve'],
-                                name        = 'Survival',
-                                line        = dict(color='royalblue', width=1, shape='vh')))
-
-    fig.update_traces(mode="markers+lines", marker=dict(size=7, symbol="line-ns-open"))                                    
-    
-    fig.add_trace(go.Scatter(   x           = x_values,
-                                y           = entry_kmf.confidence_interval_cumulative_density_['KM Survival Curve_upper_0.95'],
-                                name        = 'Conf.Up 0.95',
-                                line        = dict(color='coral', width=1, dash='dot', shape='vh')))
-
-    fig.add_trace(go.Scatter(   x           = x_values,
-                                y           = entry_kmf.confidence_interval_cumulative_density_['KM Survival Curve_lower_0.95'],
-                                name        = 'Conf.Down 0.95',
-                                line        = dict(color='coral', width=1, dash='dash', shape='vh')))
-    
-    fig.update_layout(      xaxis_title     = "Months",
-                            yaxis_title     = f'''{mode} Cumulative Density value''',
-                            hovermode       = "x unified",
-                            legend          = dict( orientation = 'v',
-                                                        # yanchor     = 'bottom',
-                                                        # y           = 1.02,
-                                                        # xanchor     = 'right',
-                                                        # x           = 1,
-                                                        font=dict(size= 11)),
-                            title_x         =0.5,
-                            title_font_family="sans-serif",
-                            title           =dict(text=plot_title, font=dict(size=25)),
-                            xaxis           = dict( zeroline    = False,
-                                                    domain      = [0,0.94],
-                                                    showgrid    = True),
-                            yaxis           = dict( zeroline    = False,
-                                                    showgrid    = True),
-                            bargap          = 0.1)
-    
-    plot_div:       str             = plot(fig, output_type="div", config=cns.TOOLBAR_CONFIG)
-    
-    return plot_div
-
 

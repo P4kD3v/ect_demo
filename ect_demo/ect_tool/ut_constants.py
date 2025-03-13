@@ -1,22 +1,15 @@
-#   App Name:   Endometrial Cancer Tool v5.
+#   App Name:   Endometrial Cancer Tool (Demo).
 #   Author:     Xavier Llobet Navàs.
 #   Content:    Custom Panel section.
 #
 # - This file contains all the global and unmutable variables
-#   that can be reused in all the ECT. the fields of these
+#   that can be reused in all the ECT (Demo). the fields of these
 #   variables are:
 #
-#   - Load dataframes.
-#   - Gene mRNA expression rankings.
-#   - Available Hugo en Entrez IDs.
-#   - Infiltration dataset columns names and its values.
-#   - Infiltration colors by method.
-#   - Infiltration colors by cell type.
-#   - Inifltration axis ranges for plotting.
+#   - Load dataframe.
 #   - Survival dataset columns names and its values.
 #   - Survival method names translation dictionary.
 #   - Clinical categories name translation dictionary.
-#   - Cusotm Plot fields and its html keys.
 #   - Plotly toolbar configuration.
 #
 # - Other modules used:

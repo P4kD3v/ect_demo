@@ -1,170 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <!--------------------------
-        META DATA 
-    --------------------------->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HEAD -->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-------------------------- 
-        CSS & BOOTSTRAP 
-    --------------------------->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/admin.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/index.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/main.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/home.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/overview.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/genes.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/custom_panel.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/other_apps.css' %}">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/css/jquery_ui.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>  
+        
+        <!-------------------------- 
+            JAVASCRIPT AND JQUERY 
+        --------------------------->
+        {% load static %}
+        <script src="{% static 'ect_tool/vendor/jquery/jquery-3.6.1.min.js' %}"></script>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.css' %}">
+        {% load static %}
+        <script src="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'ect_tool/css/index.css' %}">
 
-    <!-------------------------- 
-        JAVASCRIPT AND JQUERY 
-    --------------------------->
-    {% load static %}
-    <script src="{% static 'ect_tool/vendor/jquery/jquery-3.6.1.min.js' %}"></script>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.css' %}">
-    {% load static %}
-    <script src="{% static 'ect_tool/vendor/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
-    
-    <!-------------------------- 
-        MY JQUERY 
-    --------------------------->
-    <!-- {% load static %}
-    <script src="{% static 'ect_tool/js/plot_info.js' %}"></script> -->
-    {% load static %}
-    <script src="{% static 'ect_tool/js/gene_search.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/infiltration_form.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/overview_form.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/gene_form.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/gene_plots_form.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/tools.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/progress.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/bmi_tool.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/scroll_legend.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/gene_ranking.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/custom_plot_designer.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/custom_plot_designer_button.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/custom_plot_designer_add_rm .js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/registration.js' %}"></script>
-    {% load static %}
-    <script src="{% static 'ect_tool/js/admin.js' %}"></script>
+        <title>{{title}}</title>
 
-    <script>
-      $( function() {
-        $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-        $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-      } );
-    </script>
+    </head>
 
-    <!--------------------------
-        TITLE 
-    --------------------------->
-    <title>ECT v4 {{title}}</title>
+    <!-- BODY -->
+    <body>
+        <div class="row m-0 p-0">
+            <!-- HEADER -->
+            <header class="row p-0 m-0">
+                <div class="row h-100 m-0 p-4 pt-2">
+                    <div class="col-1 m-0 p-0 pt-2">
+                    </div>
+                    <div class="col-10 m-0 p-4 pt-0 ps-0">
+                        <h1 class="m-0 ms-2 mt-4 p-0 pt-1 display-4 text-center title">{{title}}</h1>
+                    </div>
+                    <div class="col-1 m-0 p-0 pt-3 pe-1 logo_column">                        
+                        {% load static %}
+                        <img src="{% static 'ect_tool/img/xavi_3.drawio.svg' %}" class="img-fluid float-end third_img" alt="Xavier Llobet">
+                        {% load static %}
+                        <img src="{% static 'ect_tool/img/xavi_2.drawio.svg' %}" class="img-fluid float-end second_img" alt="Xavier Llobet">
+                    </div>
+                </div>            
+            </header>
 
-  </head>
+            <div class="row p-0 m-0 text-center border-bottom topmenu_bg">
+                <small><p class="m-0 p-2 apps">
+                    <a class="m-0 p-0" href="{% url 'ect:index' %}">Home</a>
+                    <a class="m-0 p-0 ps-4" href="{% url 'ect:ect' %}">EC Tool</a>
+                    <a class="m-0 p-0 ps-4" href="{% url 'ect:cite_us' %}">Cite Us</a>
+                </p></small>
+            </div>
 
-  <body>
+            <!-- FIRST ROW: TOOLS MENU AND MAIN FORMS -->
+            <div class="row m-0 p-0 pb-4 mb-4">
 
-    <!--------------------------  
-        HEADER 
-    --------------------------->
+                <!-- CENTRAL MAIN FORM OPTIONS -->
+                
+                {% if field == 'home' %}
+                    <div class="col-12 m-0 p-0">
+                        <div class="row m-0 p-0" id="home">
+                            {% block home %}
+                            {% endblock home %} 
+                        </div>
+                    </div>
+                {% endif %}
 
-    <div class="row m-0 pb-0 pt-3 text-center text-white header align-middle bg_blocks">
-      {% include "./block_top_menu.html" %}
-    </div>
-    
-    <!-------------------------- 
-        HOME PAGE CONTENT 
-    --------------------------->
+                {% if field == 'ect' %}
+                    <div class="col-12 m-0 p-0">
+                        <div class="row m-0 p-0 ps-1 pe-1" id="ect">
+                            {% block ect %}
+                            {% endblock ect %} 
+                        </div>
+                    </div>
+                {% endif %}
 
-    {% if type == 'home' %}
-    <div class="row pb-4" id="home">      
-      {% block home %}
-      {% endblock home%}   
-    </div>
-    {% endif %}
+                {% if field == 'cite_us' %}
+                    <div class="col-1 m-0 p-0">
+                    </div>
+                    <div class="col-9 m-0 mb-4 p-0 pt-2 pb-4">
+                        <div class="row m-0 p-0 pe-2" id="cite_us">
+                            {% block cite_us %}
+                            {% endblock cite_us %} 
+                        </div>
+                    </div>
+                {% endif %}
 
-    <!-------------------------- 
-        HELP PAGE CONTENT 
-    --------------------------->
+            </div>  
 
-    {% if type == 'help_guide' %}
-    <div class="row pb-4" id="help_guide">      
-      {% block help_guide %}
-      {% endblock help_guide%}   
-    </div>
-    {% endif %}
+            <div class="row m-0 mt-4 mb-4 p-0 pb-4 mb-4"></div>            
 
-
-    <!-------------------------- 
-        OVERVIEW PAGE CONTENT 
-    --------------------------->
-
-    {% if title == 'Overview' or title == 'Overview Survival' %}
-    <div class="row pe-1 ps-1 mb-4" id="overview">  
-      <!-- MAIN CONTAINER AS BODY WHERE DE DATA WILL APPEAR -->
-      <div class="col-12 col-s-9">     
-        {% block overview %}
-          <div class="col-12 col-s-9" id="overview_survival">
-            {% block overview_survival %}
-            {% endblock overview_survival %}
-          </div>
-          <div class="col-12 col-s-9" id="overview_infiltration">
-            {% block overview_infiltration %}
-            {% endblock overview_infiltration %}
-          </div>
-          <div class="col-12 col-s-9" id="overview_clinical_infiltration">
-            {% block overview_clinical_infiltration %}
-            {% endblock overview_clinical_infiltration %}
-          </div>
-          <div class="col-12 col-s-9" id="overview_bmi">
-            {% block overview_bmi %}
-            {% endblock overview_bmi %}
-          </div>
-        {% endblock overview %} 
-      </div>  
-    </div>
-    {% endif %}    
-
-
-    <!--------------------------  
-        FOOTER 
-    --------------------------->
-    <div class="row m-0 pt-4 pb-4 footer">
-      {% include "./block_footer.html" %}
-    </div>  
-
-  </body>
+            <!-- FOOTER -->
+            <footer class="row m-0 mt-4 p-4 pb-3">
+                <div class="row m-0 p-4 w-100 h-100 text-center">
+                    <div class="col-4 m-0 p-0 text-start">
+                    </div>
+                    <div class="col-4 m-0 p-0">
+                        <p class="fs-6 p-4 text-white"><small>Copyright &copy 2025 Xavier Llobet</small></p>
+                    </div>
+                    <div class="col-4 m-0 p-0 text-end">
+                        <p class="fs-6 p-4 text-white"><small>Developed by <a class="link-info" href="https://www.linkedin.com/in/xavier-l-455975223/">Xavier Llobet</a></small></p>
+                    </div>                
+                </div>
+            </footer>
+        </div>
+    </body>
 </html>

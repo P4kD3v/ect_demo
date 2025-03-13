@@ -1,435 +1,156 @@
-/*
-    Click nbfs: //nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-    Click nbfs: //nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-    Author    : xln
-
-    ###########################################
-    GENERIC STYLES
-    ###########################################
-*/
-
-/* --------------------------------------------------------------------------------- */
-
-* {
-    box-sizing:                 border-box;
-}
-
-
-a{
-    text-decoration:            none;
-    color:                      black;
-    text-align:                 center;
-    font-size:                  1em;
-    padding-left:               20px;
-    width:                      90%;
-}
-
-a:hover{
-    text-decoration:            none;
-    color:                      #0099cc;
-    text-align:                 center;
-    font-size:                  1em;
-}
-
 body{
-    overflow-x: hidden;
+    font-family:        Verdana, Geneva, Tahoma, sans-serif;
+    overflow-y:         scroll;
+    position:           relative;
 }
 
-td>a:hover{
-    color:                      #0099cc;;
+html,body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
 }
 
-td>a:hover{
-    color:                      #0099cc;;
+header{
+    height: 150px;
+    font-family: 'Brush Script MT';
+    vertical-align: middle;
+    position: relative;
+    color: transparent;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
+    vertical-align:     middle;
+    background-color: rgb(10, 68, 106);
 }
 
-div[class="row submenu"]>div[class="col-2"]>a{
-    color:                      white;
+.topmenu{
+    background-color: rgb(4, 26, 41);
 }
 
-div[class="row submenu"]>div[class="col-2"]>a:hover{
-    color:                      #efefef;
+.fields{
+    background-color: rgb(7, 47, 73);
 }
 
-input[type="text"], textarea{
-    border:                     1px solid rgb(222, 222, 222);
-    border-radius:              5px;
-    margin-bottom:              1%;
+.fields:hover{
+    background-color: rgb(7, 62, 99);
+    cursor: pointer;
 }
 
-div[class="row"]>p{
-    padding-left:               3%;
+.left_menu{
+    background-color: rgb(17, 93, 144);
 }
 
-img{
-    width:                      49%;
-    padding:                    2%;
+.fields_menu{
+    background-color: rgb(57, 134, 185);
+    opacity: 80%;
 }
 
-h5{
-    padding-top:                1%;
-    text-align:                 center;
+.select_labels{
+    background-color: rgb(15, 112, 150);
 }
 
-/* h4>button{
-    border:                     none;
-    border-radius:              5px;
-    padding:                    15px;
-    background-color:           white;
-    border:                     1px solid #09a3d6;
-    color:                      #09a3d6;
-} */
-
-h4>button:hover{
-    cursor:                     default;
+.topmenu_bg{
+    background-color: rgb(12, 83, 130);
 }
 
-h6{
-    padding-top:                1%;
-    text-align:                 center;
-    vertical-align:             middle;
-    padding:                    10px;
-    border-radius:              5px;
+.result_headers{
+    background-color: rgb(7, 58, 78);
 }
 
-select{
-    margin-bottom:              0.5%;
+.rounded-top-right {
+    border-top-right-radius: 5px;
 }
 
-label[for="floatingTextarea"]{
-    color:                      rgb(112, 112, 112);
+.rounded-bottom-right {
+    border-bottom-right-radius: 5px;
 }
 
-div[class=row]>h3{
-    margin-top:                 10%;
+footer{
+    vertical-align:     bottom;
+    bottom:             0; 
+    left:               0; 
+    position:           static;
+    color:              white;
+    background-color: rgb(15, 96, 150);
 }
 
-i{
-    color:                      white;
-}
-
-/* 
-#############
-IDs
-#############
-*/
-
-.bmi_value, .bmi_status{
-    width:                      30%;
-    height:                     200px;
-    background-color:           darkblue;
-    color:                      white;
-    display:                    inline-block;
-    vertical-align:             middle;
-    border-radius:              10px;
-}
-
-#custom_plot_form_div{
-    background-color:           #266bb1;
-}
-
-#fields_table {
-    font-family:                'Courier New', Courier, monospace;
-     border-collapse:           collapse;
-    width:                      100%;
-}
-
-#fields_table td, #fields_table th {
-    border-right:               1px solid #efefef;
-    padding:                    8px;
-}
-
-#fields_table tr:nth-child(even){
-    background-color:           #f8f8f8;
-}
-
-#fields_table tr:nth-child(odd){
-    background-color:           #ffffff;
-}
-
-#fields_table tr:hover{
-    background-color:           rgb(232, 232, 232);
-}
-
-#fields_table th {
-  padding-top:                  12px;
-  padding-bottom:               12px;
-  text-align:                   left;
-  background-color:             rgb(150, 151, 58);
-  color:                        white;
-}
-
-#lateral_column_bg{
-    background-color:           #266bb1;
-}
-
-#gene_title, #infiltration_title, #infiltration_subtitle{
-    color:                      white;
-    width:                      100%;
-    border-top-left-radius:     10px;
-    border-top-right-radius:    10px;
-    border-bottom-left-radius:  0px;
-    border-bottom-right-radius: 0px;
-}
-
-#infiltration_subtitle{
-    background-color:           #266bb1;
-    color:                      white;
-    width:                      100%;
-    border-top-left-radius:     0px;
-    border-top-right-radius:    0px;
-    border-bottom-left-radius:  0px;
-    border-bottom-right-radius: 0px;
-}
-
-#gene_title, #infiltration_title{
-    background-image:           linear-gradient(#215c97, #266bb1);
-    padding:                    40px;
-}
-
-#height, #weight{
-    width:                      40%;
-    height:                     30px;
-    font-size:                  0.9em;
-    text-align:                 center;
-}
-
-
-
-#filters_info_content{
-    font-size:                  0.9em;
-}
-
-#survival_title, #infiltration_filters_title{
-    background-color:           #266bb1;
-    color:                      white;
-    width:                      100%;
-    padding:                    30px;
-    border-radius:              3px;
-
-}
-
-#myProgress {
-    width:                      99%;
-    background-color:           #ddd;
-    margin-left:                12px;
-    padding-left:               0%;
-    padding-right:              0%;
-}
-  
-#myBar {
-    width:                      10%;
-    height:                     15px;
-    background-color:           #04AA6D;
-    text-align:                 center;
-    line-height:                15px;
-    color:                      white;
-    font-size:                  0.8em;    
-}
-
-#pubmed_input, #ncbi_input,
-#hgnc_input, #ensembl_input,
-#tcga_input{
-    width:                      95%;
-    font-size:                  0.9em;
-}
-
-#registration_form, #login_form{
-
-    border-radius:              10px;
-}
-
-#registration_form>h2, #login_form>h2{
-    color:                      #ffffff;
-}
-
-#registration_form>div>label,
-#login_form>div>label{
-    font-size:                  0.8em;
-}
-
-/* 
-#############
-CLASSES
-#############
-*/
-
-.authentication_bg{
-    /* background-color: #153e66; */
-    background-color:           #1b1b1b;
-}
-
-.row::after {
-    content:                    "";
-    clear:                      both;
-    display:                    table;
-}
-  
-[class*="col-"] {
-    float:                      left;
-}
-
-.error{
-    color:                      red;
-    font-size:                  0.9em;
-}
-
-.input_as_label:hover{
-    cursor:                     default;
-}
-
-.loading_dash{
-    animation-name:             dash;
-    animation-duration:         2s;
-    font-size:                  1.2em;
-    position:                   relative;
-}
-
-.lds-dual-ring {
-    display:                    inline-block;
-    width:                      60px;
-    height:                     60px;
-    margin-left:                48%;
-    color:                      #2568aa;
-}
-
-.lds-dual-ring:after {
-    content:                    " ";
-    display:                    block;
-    width:                      44px;
-    height:                     44px;
-    margin:                     8px;
-    border-radius:              50%;
-    border:                     6px solid #2568aa;
-    border-color:               #2568aa transparent #2568aa transparent;
-    animation:                  lds-dual-ring 1.2s linear infinite;
-}
-
-@keyframes lds-dual-ring {
-    0% {
-      transform:                rotate(0deg);
-    }
-    100% {
-      transform:                rotate(360deg);
-    }
-}
-
-.menu ul {
-    list-style-type:            none;
-    margin:                     0;
-    padding:                    0;
-}
-  
-.menu li {
-    padding:                    8px;
-    background-color:           white;
-    color:                      black;
-    border-right:               2px solid #efefef;
-    font-size:                  1em;
-    overflow-x:                 auto;
-}
-  
-.menu li:hover {
-    background-color:           white;
-    color:                      black;
-}
-
-.my_select{
-    width:                      70%;
-    margin-left:                15%;
-    margin-right:               15%;
-}
-
-.my_select:hover{
-    cursor:                     pointer;
-    border-color:               darkblue;
-}
-
-.previous_data:focus{
-    outline:                    none;
-}
-
-.previous_data{
-    width:                      60%;
-}
-
-.sequence{
-    width:                      100%;
-    margin-top:                 0%;
-    margin-bottom:              0%;
-    font-family:                Courier New, Courier, monospace;
-    font-size:                  1em;
-    font-weight:                normal;
-}
-
-.show_subm_1{
-    background-color:           #0099cc;
-}
-
-.show_subm_2{
-    background-color:           #0099cc;
-    border:                     none;
-    color:                      #ffffff;
-    vertical-align:             bottom;
-    border-radius:              5px;
-    font-size:                  0.5em;
-    padding:                    5px;
-    padding-right:              5px;
-}
-
-.show_subm_1:hover, .show_subm_2:hover{
-    background-color:           #43bee7;
-}
-
-.submenu>div{
-    background-color:           #0099cc;
-    text-align:                 center;
-}
-
-.submenu>div:hover{
-    background-color:           #348ad6c4;
-}
-
-.tools_button{
-    background-image: linear-gradient(to right, #153e66 , #266bb1);
-    border-radius: 15px;
-    border: none;
+.apps>a{
+    text-decoration: none;
     color: white;
 }
 
-.tools_button:hover{
-    background-image: linear-gradient(to right, #153e66 , #3b97f3);
+.apps>a:hover{
+    text-decoration: none;
+    color: rgb(140, 236, 240);
+}
+
+.apps>div>a{
+    text-decoration: none;
     color: white;
 }
 
-.link_btn{
-    border: 1px solid white;
+.apps>div>a:hover{
+    text-decoration: none;
+    color: rgb(140, 236, 240);
+    background-color: rgb(18, 104, 161);
+}
+
+.neonText {
+    color: white;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 17px #fff,
+    0 0 38px #5271ff,
+    0 0 55px #5271ff,
+    0 0 65px #5271ff,
+    0 0 75px #5271ff,
+    0 0 80px #5271ff;
+  }
+
+.fliker_pak{
+    animation: flicker 1.5s infinite alternate; 
+}
+
+.logo_column>.second_img{
     width: 100%;
+    height: auto;
+    max-height: 100px;
+    max-width: 100px;
+    position: absolute;
+    top: 20px;
+    right: 25px;
 }
 
-.plot{
-    border-left:                1px solid rgb(231, 231, 231);
-    border-bottom:              1px solid rgb(231, 231, 231);
+.logo_column>.third_img{
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    max-width: 100px;
+    position: absolute;
+    top: 20px;
+    right: 70px;
 }
 
-.plot_header{
-    font-family:                'Courier New', Courier, monospace;
-    text-align:                 center;
-    font-weight:                bold;
-    background-color:           white;
-    border:                     1px solid #09a3d6;
-    color:                      black;
-    padding-right:              4px;
-    padding-top:                10px;
-    padding-bottom:             10px;
-    border-radius:              4px;
-}
-
-/* 
-#############
-SCREEN SIZES 
-#############
-*/
+  /* Flickering animation */
+@keyframes flicker {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+  
+        text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #5271ff,
+        0 0 82px #5271ff,
+        0 0 92px #5271ff,
+        0 0 102px #5271ff,
+        0 0 151px #5271ff;    
+    }    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }    
+  }
 
 /* For mobile phones: */
 [class*="col-"] {
@@ -468,21 +189,6 @@ SCREEN SIZES
     .col-12 {width:     100%;}
 }
 
-/* 
-#######################
-FOR SCROLL AUTOCOMPLETE 
-#######################
-*/
-
-.ui-autocomplete {
-    max-height:         200px;
-    text-align:         center;
-    overflow-y:         auto;
-    overflow-x:         hidden;
+.carousel_image{
+    height: 400px;
 }
-  /* IE 6 doesn't support max-height
-   * we use height instead, but this forces the menu to always be this tall
-   */
-* html .ui-autocomplete {
-    height:             100px;
-  }
