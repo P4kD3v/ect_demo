@@ -1,4 +1,4 @@
-# Endometrial Cancer Tool (Demo) README
+# Endometrial Cancer Tool (Demo)
 ## Projects Aim
 
 The Endometrial Cancer Tool (Demo) is a cutting-edge web application designed to statistically analyze this disease survival and generate comprehensive survival plots.
