@@ -119,7 +119,7 @@ def survival_figure_generator(survival_df:      pd.DataFrame,
     # Create the plot figure:
     if (facet_col_groups != None):
         survival_fig: Figure  = px.line(data_frame              = survival_df,
-                                        width=1000,
+                                        width                   = 1000,
                                         x                       = "timeline",
                                         y                       = "Survival probability",
                                         color                   = "Legend",
