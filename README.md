@@ -7,7 +7,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 
 ## Technologies and libraries
 
-- Python 3.9.
+- Python 3.10.12
 - Django framework.
 - Dash/Plotly.
 - Pandas.
