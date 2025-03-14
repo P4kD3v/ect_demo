@@ -39,7 +39,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 			
 		
 	- <font size=4>**Directory tree structure**</font>:
- 	 		![Directory structure](https://github.com/P4kD3v/ect_demo/blob/main/ect_demo%20tree.png?raw=true)
+ 	 	![Directory structure](https://github.com/P4kD3v/ect_demo/blob/main/ect_demo%20tree.png?raw=true)
 
 2. ### Location of the main function.
       The main door or function of the project, is the ***ìndex()*** function from **views.py** file from ***'ect_demo/ect_demo/ect_tool'*** folder. 
