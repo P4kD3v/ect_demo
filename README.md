@@ -47,13 +47,27 @@ It simplifies the complex process of survival analysis, to easily create statist
 2. ### Location of the main function.
       The main door or function of the project, is the ***ìndex()*** function from **views.py** file from ***'ect_demo/ect_demo/ect_tool'*** folder. 
 
-3. ### How to install.
-      Use the **requirements.txt** file.
+3. ### How run the application.
+   
+   	Install the packages needed using the **requirements.txt** file.
+   
+	```bash
+	pip install -r requirements.txt
+	```
 
-4. ### Run application.
-	- Open a terminal.
-	- Go to the **ect_demo/ect_demo/** folder where the **manage.py** file is placed.
-    - Type: ***python3 manage.py migrate***
-    - Type: ***python3 manage.py runserver***
-    - Visite the url ***http://127.0.0.1:8000/***
+	Clone the repository.
+
+	```bash
+	git clone https://github.com/P4kD3v/ect_demo.git
+	cd ect_demo/ect_demo
+	```
+
+	Run the application:
+
+	```bash
+	python3 manage.py migrate
+	python3 manage.py runserver
+	```
+
+  	 Visite the app in your brouser at ***http://127.0.0.1:8000/***
 
