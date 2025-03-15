@@ -8,11 +8,13 @@ It simplifies the complex process of survival analysis, to easily create statist
 ## Technologies and libraries
 
 - Python 3.10.12
-- Django framework.
-- Dash/Plotly.
-- Pandas.
+- Django 5.1.1
+- Dash 2.18.2
+- Dash Bio 1.0.2
+- Plotly 5.20.0
+- Pandas 2.1.4
 - Scikit.
-- Lifelines.
+- Lifelines 0.27.7
 - HTML.
 - CSS.
 - Bootstrap.
