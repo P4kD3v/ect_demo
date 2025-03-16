@@ -2,7 +2,7 @@
 #   Author:     Xavier Llobet Navàs.
 #   Content:    Survival analysis helpers.
 #
-# - This file contains all the functions that ECT v5 will use
+# - This file contains all the functions that ECT (Demo) will use
 #   to do a survival analysis. Te functions are:
 #
 #   - km_category_survival_helper(): survival analysis by clinical category.

@@ -1,6 +1,6 @@
-#   App Name:   Endometrial Cancer Tool v5.
+#   App Name:   Endometrial Cancer Tool (Demo)).
 #   Author:     Xavier Llobet Navàs.
-#   Content:    Dataset reading.
+#   Content:    ECT (Demo) dataset reading.
 
 # IMPORTS
 # =====================================================================

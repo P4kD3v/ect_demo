@@ -1,8 +1,8 @@
-#   App Name:   Endometrial Cancer Tool v5
+#   App Name:   Endometrial Cancer Tool (Demo)
 #   Author:     Xavier Llobet Navàs
-#   Content:    ECT urls
+#   Content:    ECT (Demo) urls
 #
-# - This file contains all the paths for Endometrial Cancer Tool
+# - This file contains all the paths for Endometrial Cancer Tool (Demo)
 #   will use to serve the views:
 #
 # =====================================================================

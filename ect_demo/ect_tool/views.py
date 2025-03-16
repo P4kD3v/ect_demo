@@ -9,16 +9,7 @@
 #
 #   - Home
 #   - EC Tool
-#   - Help
-#
-# - Not all the sections are available for all users. Not registered
-#   users only can see Home an Overview fields. Registered users can 
-#   also see Genes, Custom Plot and Other Apps sections. Admin users
-#   can see everything said before, plus an admin site to manage
-#   users and dataset update.
-#
-# - Admin and authentication sites cover the user management. Admin
-#   site for user modification or user deletion.
+#   - Cite Us
 #
 # - Home site for a summary of the ECT purpose and the data used.
 #
@@ -43,11 +34,8 @@ from .  import  ut_survival                     as  surv
 # ---------------------------------------------------------------------
 def index(request):
     '''
-    This function return the home view hwere to see a brief
-    description of the Endometrial Cancer Tool porpuse and 
-    manage the post requests for search into the PubMed, NCBI,
-    HGNC, Ensembl and TCGA databases, and redirect to this
-    pages with the resulting search.
+    This function return the home view were to see a brief
+    description of the Endometrial Cancer Tool (Demo) purpose.
     '''
 
     if request.method == 'GET':
@@ -69,7 +57,7 @@ def index(request):
 # ---------------------------------------------------------------------
 def ect(request):
     '''
-    Landing view for the Endometrial Cancer Tool.
+    View to generate plots about Endometrial Cancer with TCGA data.
     '''
 
     if request.method == 'GET':
@@ -111,6 +99,9 @@ def ect(request):
     
 # ---------------------------------------------------------------------
 def cite_us(request):
+    '''
+    View that shows how to cite this web application.
+    '''
 
     if request.method == 'GET':
         # Template context date

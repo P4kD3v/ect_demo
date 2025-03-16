@@ -1,6 +1,6 @@
 #   App Name:   Endometrial Cancer Tool (Demo).
 #   Author:     Xavier Llobet Navàs.
-#   Content:    Survival plots file.
+#   Content:    ECT (Demo) survival plot functions with Plotly.
 #
 # - This file contains all the functions needed to generate the
 #   next plots:

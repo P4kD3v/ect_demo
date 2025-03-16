@@ -1,6 +1,6 @@
 #   App Name:   Endometrial Cancer Tool (Demo).
 #   Author:     Xavier Llobet Navàs.
-#   Content:    ECT statistics.
+#   Content:    ECT (Demo) statistics.
 #
 # - This file contains a function for statistical analysis. The
 #   function is:

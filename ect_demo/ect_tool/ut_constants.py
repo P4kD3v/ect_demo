@@ -1,6 +1,6 @@
 #   App Name:   Endometrial Cancer Tool (Demo).
 #   Author:     Xavier Llobet Navàs.
-#   Content:    Custom Panel section.
+#   Content:    Constant variables for ECT (Demo).
 #
 # - This file contains all the global and unmutable variables
 #   that can be reused in all the ECT (Demo). the fields of these
