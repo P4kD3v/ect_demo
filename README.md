@@ -42,7 +42,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 		
 	- <font size=4>**Directory tree structure**</font>:
 
- 	 	![Directory structure](https://github.com/P4kD3v/ect_demo/blob/main/ect_demo%20tree.png?raw=true)
+ 	 	![Directory structure](https://github.com/XLlobet/ect_demo/blob/main/ect_demo%20tree.png)
 
 2. ### Location of the main function.
       The main door or function of the project, is the ***ìndex()*** function from **views.py** file from ***'ect_demo/ect_demo/ect_tool'*** folder. 
@@ -58,7 +58,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 	Clone the repository.
 
 	```bash
-	git clone https://github.com/P4kD3v/ect_demo.git
+	git clone https://github.com/XLlobet/ect_demo.git
 	cd ect_demo/ect_demo
 	```
 
