@@ -8,7 +8,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 ## Technologies and libraries
 
 - Python 3.10.12
-- Django 5.1.1
+- Django 4.2.20
 - Dash 2.18.2
 - Dash Bio 1.0.2
 - Plotly 5.20.0
