@@ -1,4 +1,4 @@
-Django==5.1.1
+Django==4.2.20
 django-debug-toolbar==4.2.0
 django-pandas==0.6.7
 django-plotly-dash==2.4.5
