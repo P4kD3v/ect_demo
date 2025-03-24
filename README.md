@@ -58,7 +58,7 @@ It simplifies the complex process of survival analysis, to easily create statist
 	Clone the repository.
 
 	```bash
-	git clone https://github.com/XLlobet/ect_demo.git
+	git clone git@github.com:XLlobet/ect_demo.git
 	cd ect_demo/ect_demo
 	```
 
